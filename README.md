@@ -22,54 +22,54 @@ A free short link service based on Cloudflare Workers and KV storage, supporting
 
 ### 1. Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### 2. Login to Cloudflare
 
-\`\`\`bash
+```bash
 npx wrangler login
-\`\`\`
+```
 
 ### 3. Create KV Namespace
 
-\`\`\`bash
+```bash
 # Create production KV namespace
 npx wrangler kv:namespace create "LINKS_KV"
 
 # Create preview KV namespace
 npx wrangler kv:namespace create "LINKS_KV" --preview
-\`\`\`
+```
 
 ### 4. Update Configuration
 
 Update the created KV namespace IDs in the \`wrangler.toml\` file:
 
-\`\`\`toml
+```toml
 [[kv_namespaces]]
 binding = "LINKS_KV"
 id = "your-production-kv-namespace-id"
 preview_id = "your-preview-kv-namespace-id"
-\`\`\`
+```
 
 ### 5. Local Development
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 ### 6. Deploy to Production
 
-\`\`\`bash
+```bash
 npm run deploy
-\`\`\`
+```
 
 ## API Endpoints
 
 ### Create Short Link
 
-\`\`\`
+```
 POST /api/create
 Content-Type: application/json
 
@@ -77,25 +77,25 @@ Content-Type: application/json
   "content": "URL or text content to shorten",
   "customCode": "Custom short code (optional)"
 }
-\`\`\`
+```
 
 **Response Example:**
-\`\`\`json
+```json
 {
   "success": true,
   "shortUrl": "https://your-domain.com/abc123",
   "shortCode": "abc123"
 }
-\`\`\`
+```
 
 ### Get Statistics
 
-\`\`\`
+```
 GET /api/stats/{shortCode}
-\`\`\`
+```
 
 **Response Example:**
-\`\`\`json
+```json
 {
   "success": true,
   "stats": {
@@ -105,7 +105,7 @@ GET /api/stats/{shortCode}
     "isUrl": true
   }
 }
-\`\`\`
+```
 
 ## Usage Instructions
 
@@ -123,10 +123,10 @@ GET /api/stats/{shortCode}
 
 Update the domain configuration in \`wrangler.toml\`:
 
-\`\`\`toml
+```toml
 [vars]
 DOMAIN = "your-custom-domain.com"
-\`\`\`
+```
 
 ### Adjust Short Code Length
 
